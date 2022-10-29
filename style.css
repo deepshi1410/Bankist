@@ -1,17 +1,17 @@
-/* The page is NOT responsive. You can implement responsiveness yourself if you wanna have some fun 😃 */
+/* The page is NOT responsive */
 
 :root {
-  --color-primary: #5ec576;
-  --color-secondary: #ffcb03;
-  --color-tertiary: #ff585f;
-  --color-primary-darker: #4bbb7d;
-  --color-secondary-darker: #ffbb00;
-  --color-tertiary-darker: #fd424b;
-  --color-primary-opacity: #5ec5763a;
+  --color-primary: #77bfe9;
+  --color-secondary: #f5a836;
+  --color-tertiary: #f780bb;
+  --color-primary-darker: #3d7ebb;
+  --color-secondary-darker: #d8a005;
+  --color-tertiary-darker: #fc46a1;
+  --color-primary-opacity: #5b93c73a;
   --color-secondary-opacity: #ffcd0331;
   --color-tertiary-opacity: #ff58602d;
-  --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
-  --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+  --gradient-primary: linear-gradient(to top left, #77bfe9, #3d7ebb);
+  --gradient-secondary: linear-gradient(to top left, #f5a836, #d8a005);
 }
 
 * {

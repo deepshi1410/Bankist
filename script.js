@@ -28,3 +28,6 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+// document is not enough to select document element of the DOM. use documentElement method of document to select the needed.
+console.log(document.documentElement)
+
