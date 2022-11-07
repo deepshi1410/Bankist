@@ -123,12 +123,12 @@ scrollToButton.addEventListener('click', function (e) {
 // an event is just a signal created by a DOM node. a sinal that something ahs happened in the webpage - a user scrolling the mouse,
 // mouse click, keypress and so on. to listen to these events are the methos called event handlers.
 // mouseenter event is similar to hover event
-let h1Element = document.querySelector('h1')
-console.log('12', h1Element)
-// new way of event listener
-h1Element.addEventListener('mouseenter', function (e) {
-  console.log('mouseenter occurred')
-})
+// let h1Element = document.querySelector('h1')
+// console.log('12', h1Element)
+// // new way of event listener
+// h1Element.addEventListener('mouseenter', function (e) {
+//   console.log('mouseenter occurred')
+// })
 
 // old way
 // h1Element.onmouseenter = function () {
@@ -137,13 +137,32 @@ h1Element.addEventListener('mouseenter', function (e) {
 // rather we can create a function and pass it as argument to addeventlistener and in same function, remove evnetlistener
 // generate random values for rgb
 // rgb(255, 255, 255)
-const randomValues = (min, max) => Math.random() * (max - min + 1);
-console.log(randomValues(0, 255))
-const linkElement = document.querySelector('.nav__link')
-linkElement.addEventListener('click', function () {
-  console.log('link');
-  this.style.backgroundColor = rgb(randomValues(0, 255), randomValues(0, 255), randomValues(0, 255))
-})
+// const randomValues = (min, max) => Math.random() * (max - min + 1);
+// console.log(randomValues(0, 255))
+// const randomColor = () => `rgb(${randomValues(0, 255)}, ${randomValues(0, 255)}, ${randomValues(0, 255)}`;
+
+// on click of link element , an event actually happens at root element and it passes from root element to target element and then bubbles up .
+// bubbling up means the event happens at all parent element
+// e.target is the element where the click event first happened
+// e.currentTarget is the current element to which the event listener is attached
+// this === e.currentTarget
+// to stop event propagation , use e.stopPropagation
+// const linkElement = document.querySelector('.nav__link')
+// linkElement.addEventListener('click', function (e) {
+//   console.log('link', e.target);
+//   this.style.backgroundColor = randomColor()
+//   // e.stopPropagation()
+// })
+// const parentOfLinkElement = document.querySelector('.nav__links')
+// parentOfLinkElement.addEventListener('click', function (e) {
+//   console.log('parent', e.target)
+//   // this.style.backgroundColor = randomColor()
+// })
+// // by setting third parameter to true, we mean that capture the events at capturing phase of an event.
+// const superParent = document.querySelector('.nav')
+// superParent.addEventListener('click', function (e) {
+//   console.log('super parent', e.target, e.currentTarget);
+// }, false)
 
 
 
