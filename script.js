@@ -72,7 +72,7 @@ scrollToButton.addEventListener('click', function (e) {
 // })
 
 // event delegation
-// event listners are set on page load. what if the element to which event listener is attached is not pesent on initial load?
+// event listeners are set on page load. what if the element to which event listener is attached is not pesent on initial load?
 // call the handler on parent element which is present on initial page load - event delegation
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   // preventig default behaviour that on clicking link, user will be redirected to section id present in href
@@ -87,6 +87,35 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 })
 
+// DOM Traversing
+// basically reaching child elements, sibling elements , parent elements from one particular element.
+// traversing DOM in upward, sideways and downward direction
+
+const h1 = document.querySelector('h1')
+console.log(h1)
+// // displaying all child nodes
+// console.log(h1.childNodes)
+// // displaying direct children nodes
+// console.log(h1.children)
+// //displaying first child node
+// console.log('node', h1.firstChild)
+// console.log(h1.firstElementChild)
+// // displaying last child node
+// console.log(h1.lastElementChild)
+// // displaying parent element
+// console.log(h1.parentElement)
+// console.log(h1.parentNode)
+// finding the closest ancestor of the element that matches the selector
+// console.log(h1.closest('.header'))
+// finding siblings (sideways traversal)
+//getting previos sibling 
+console.log(h1.previousSibling)
+console.log(h1.previousElementSibling)
+//getting next sibling
+console.log('elem', h1.nextElementSibling)
+console.log(h1.nextSibling)
+// getting all siblings
+console.log(h1.parentElement.children)
 /////////////////////////////////////////////////////
 // SELECTING ELEMENTS
 // document is not enough to select document element of the DOM. use documentElement method of document to select the needed.
