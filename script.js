@@ -1,13 +1,16 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+////////  All Selections  /////////////////
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const scrollToButton = document.querySelector('.btn--scroll-to')
+const section1 = document.querySelector('#section--1')
 
+
+///////////////////////////////////////
+// Modal window
 const openModal = function (e) {
   e.preventDefault();
   modal.classList.remove('hidden');
@@ -29,19 +32,75 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// Scrolling
+// Implementing Smooth Scroll 
+scrollToButton.addEventListener('click', function (e) {
+  const s1Coords = section1.getBoundingClientRect()
+  // console.log(s1Coords)
+  // console.log(e.target.getBoundingClientRect())
+  // boudingclientrect is relative to viewport
+  //current scroll - pagexoffset, pageyoffset returns the pixel , window has been scrolled from top left corner
+  // console.log('scroll x/y', window.pageXOffset, window.pageYOffset)
+  // console.log('viewport width/height', document.documentElement.clientWidth, document.documentElement.clientHeight)
+  // this scroll position arguments are relative to viewprt and not the document
+  // window.scrollTo(s1Coords.left, s1Coords.top)
+  // this scroll position arguments are relative to document
+  // window.scrollTo(s1Coords.left + window.pageXOffset, s1Coords.top + window.pageYOffset)
+  // smooth scrolling 
+  // old way of calculating values and doing smooth croll
+  // window.scrollTo({
+  //   left: s1Coords.left + window.pageXOffset,
+  //   right: s1Coords.top + window.pageYOffset,
+  //   behavior: 'smooth'
+  // });
+  // modern way
+  section1.scrollIntoView({ behavior: 'smooth' })
+})
+
+//////////////////////////////////////////
+// Page navigation
+// not an efficient approach to implement page scroll
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault()
+//     const id = this.getAttribute('href')
+//     console.log('id', id)
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth'
+//     })
+//   })
+// })
+
+// event delegation
+// event listners are set on page load. what if the element to which event listener is attached is not pesent on initial load?
+// call the handler on parent element which is present on initial page load - event delegation
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // preventig default behaviour that on clicking link, user will be redirected to section id present in href
+  e.preventDefault()
+  // matching the correct element
+  if (e.target.classList.contains('nav__link')) {
+    console.log('inside contain')
+    const id = e.target.getAttribute('href')
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
+})
+
+/////////////////////////////////////////////////////
 // SELECTING ELEMENTS
 // document is not enough to select document element of the DOM. use documentElement method of document to select the needed.
-console.log(document.documentElement)
+// console.log(document.documentElement)
 const header = document.querySelector('.header')
 const allSections = document.querySelectorAll('.section')
 
 // this selector returns a html collection which is a liev collection which gets updated as soon as there are chnages are in any buttons
 const allButtons = document.getElementsByTagName('button')
-console.log(allButtons)
-console.log(allSections)
+// console.log(allButtons)
+// console.log(allSections)
 
 // return a ive html collection
-console.log(document.getElementsByClassName('btn'))
+// console.log(document.getElementsByClassName('btn'))
 
 // CREATING AND INSERTING ELEMENTS
 const message = document.createElement('div')
@@ -91,33 +150,6 @@ logo.classList.contains('class')
 
 // alternate way of setting up class of an element or attribute - Do not use
 // logo.className('class')
-
-// Implementing Smooth Scroll 
-const scrollToButton = document.querySelector('.btn--scroll-to')
-const section1 = document.querySelector('#section--1')
-
-scrollToButton.addEventListener('click', function (e) {
-  const s1Coords = section1.getBoundingClientRect()
-  console.log(s1Coords)
-  console.log(e.target.getBoundingClientRect())
-  // boudingclientrect is relative to viewport
-  //current scroll - pagexoffset, pageyoffset returns the pixel , window has been scrolled from top left corner
-  console.log('scroll x/y', window.pageXOffset, window.pageYOffset)
-  console.log('viewport width/height', document.documentElement.clientWidth, document.documentElement.clientHeight)
-  // this scroll position arguments are relative to viewprt and not the document
-  // window.scrollTo(s1Coords.left, s1Coords.top)
-  // this scroll position arguments are relative to document
-  // window.scrollTo(s1Coords.left + window.pageXOffset, s1Coords.top + window.pageYOffset)
-  // smooth scrolling 
-  // old way of calculating values and doing smooth croll
-  // window.scrollTo({
-  //   left: s1Coords.left + window.pageXOffset,
-  //   right: s1Coords.top + window.pageYOffset,
-  //   behavior: 'smooth'
-  // });
-  // modern way
-  section1.scrollIntoView({ behavior: 'smooth' })
-})
 
 /* Even and event handler*/
 // an event is just a signal created by a DOM node. a sinal that something ahs happened in the webpage - a user scrolling the mouse,
