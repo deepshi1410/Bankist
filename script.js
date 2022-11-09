@@ -57,6 +57,38 @@ scrollToButton.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' })
 })
 
+//Tab Component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container')
+const tabsContent = document.querySelectorAll('.operations__content')
+
+// firdt approach to attach evet handler to each of the tabs
+// not an efficient approach as what if we have > 200 tabs
+// tabs.forEach(tab => {
+//   tab.addEventListener('click', function () {
+//     console.log('tab clicked')
+//   })
+// })
+tabsContainer.addEventListener('click', function (e) {
+  // parentElement was not working because when we click on span or button, it returned a div element.
+  const clickedTab = e.target.closest('.operations__tab')
+  // console.log(clickedTab)
+  // guard close
+  if (!clickedTab) return;
+  //removing active classes from tabs and content 
+  tabs.forEach(tab => {
+    tab.classList.remove('operations__tab--active')
+  })
+  tabsContent.forEach(tab => {
+    tab.classList.remove('operations__content--active')
+  })
+  //adding active class to tab now
+  clickedTab.classList.add('operations__tab--active')
+  //Activating the content area corresponding to tab selected
+  // console.log(clickedTab.dataset.tab)
+  document.querySelector(`.operations__content--${clickedTab.dataset.tab}`).classList.add('operations__content--active')
+})
+
 //////////////////////////////////////////
 // Page navigation
 // not an efficient approach to implement page scroll
@@ -134,7 +166,7 @@ const allButtons = document.getElementsByTagName('button')
 // CREATING AND INSERTING ELEMENTS
 const message = document.createElement('div')
 message.classList.add('cookie-message')
-message.innerHTML = 'We use cookies for an enhanced experience <button class="btn btn--close-cookie">Got it!</button>'
+message.innerHTML = 'We use cookies to improve your journey and to personalize your web experience. By continuing to use this site, you are accepting the bank’s cookie policy.<button class="btn btn--close-cookie">I accept</button>'
 header.append(message)
 
 // prepend is used to attach the argument element as a first child .
