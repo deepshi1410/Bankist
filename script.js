@@ -36,6 +36,8 @@ document.addEventListener('keydown', function (e) {
 // Implementing Smooth Scroll 
 scrollToButton.addEventListener('click', function (e) {
   const s1Coords = section1.getBoundingClientRect()
+  // modern way
+  section1.scrollIntoView({ behavior: 'smooth' })
   // console.log(s1Coords)
   // console.log(e.target.getBoundingClientRect())
   // boudingclientrect is relative to viewport
@@ -53,8 +55,6 @@ scrollToButton.addEventListener('click', function (e) {
   //   right: s1Coords.top + window.pageYOffset,
   //   behavior: 'smooth'
   // });
-  // modern way
-  section1.scrollIntoView({ behavior: 'smooth' })
 })
 
 //Tab Component
@@ -88,6 +88,28 @@ tabsContainer.addEventListener('click', function (e) {
   // console.log(clickedTab.dataset.tab)
   document.querySelector(`.operations__content--${clickedTab.dataset.tab}`).classList.add('operations__content--active')
 })
+
+// Menu options fading
+// when hovering over one menu item, others should get fade
+const nav = document.querySelector('.nav')
+const handleMenuHover = function (e) {
+  const clicked = e.target;
+  if (clicked.classList.contains('nav__link')) {
+    const targetLink = e.target
+    // find sibling links
+    const siblingLinks = targetLink.closest('.nav').querySelectorAll('.nav__link')
+    const logo = targetLink.closest('.nav').querySelector('img')
+    siblingLinks.forEach(link => {
+      if (link != targetLink) link.style.opacity = this
+    })
+    logo.style.opacity = this
+  }
+}
+// looks kinda ugly that a method is called inside a callback
+// bind is the function where 'this' is the parameter passed in the bind function
+nav.addEventListener('mouseover', handleMenuHover.bind(0.5))
+nav.addEventListener('mouseout', handleMenuHover.bind(1))
+
 
 //////////////////////////////////////////
 // Page navigation
@@ -124,7 +146,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 // traversing DOM in upward, sideways and downward direction
 
 const h1 = document.querySelector('h1')
-console.log(h1)
+// console.log(h1)
 // // displaying all child nodes
 // console.log(h1.childNodes)
 // // displaying direct children nodes
@@ -141,13 +163,13 @@ console.log(h1)
 // console.log(h1.closest('.header'))
 // finding siblings (sideways traversal)
 //getting previos sibling 
-console.log(h1.previousSibling)
-console.log(h1.previousElementSibling)
-//getting next sibling
-console.log('elem', h1.nextElementSibling)
-console.log(h1.nextSibling)
-// getting all siblings
-console.log(h1.parentElement.children)
+// console.log(h1.previousSibling)
+// console.log(h1.previousElementSibling)
+// //getting next sibling
+// console.log('elem', h1.nextElementSibling)
+// console.log(h1.nextSibling)
+// // getting all siblings
+// console.log(h1.parentElement.children)
 /////////////////////////////////////////////////////
 // SELECTING ELEMENTS
 // document is not enough to select document element of the DOM. use documentElement method of document to select the needed.
@@ -184,7 +206,7 @@ message.style.height = '120%';
 message.style.backgroundColor = 'blue'
 
 // getComputedStyle is used to get details regarding the style property
-console.log(getComputedStyle(message).height)
+// console.log(getComputedStyle(message).height)
 message.style.height = Number.parseFloat(getComputedStyle(message).height) + 40 + 'px';
 
 // similar to js, we have variables in css also. to change them we use , setProperty()
@@ -193,15 +215,15 @@ document.documentElement.style.setProperty('--color-primary', 'orangered')
 // attributes
 // used to log predefined attributes of an element
 const logo = document.querySelector('.nav__logo')
-console.log(logo.alt)
+// console.log(logo.alt)
 
 // to get access of user defined attribute, use setAttribute and getAttribute
 logo.setAttribute('author', 'deepshi')
-console.log(logo.getAttribute('author'))
+// console.log(logo.getAttribute('author'))
 
 // getattribute returns relative path in case of links
 
-console.log(logo.dataset.version)
+// console.log(logo.dataset.version)
 
 // Classes - learn how to add, remove, toggle the class
 logo.classList.add('class')
