@@ -110,6 +110,26 @@ const handleMenuHover = function (e) {
 nav.addEventListener('mouseover', handleMenuHover.bind(0.5))
 nav.addEventListener('mouseout', handleMenuHover.bind(1))
 
+// Sticky Scroll
+// not efficient as each time we scroll, this event is fired
+// window.addEventListener('scroll', function (e) {
+//   console.log(e)
+// })
+// not an efficient way of implemnenting stiky scroll
+// const initialCoords = section1.getBoundingClientRect()
+// window.addEventListener('scroll', function () {
+//   console.log('scroll', this.window.scrollY)
+//   console.log(window.scrollY, ' ', initialCoords.top)
+//   if (window.scrollY > initialCoords.top) {
+//     console.log('sticky');
+//     nav.classList.add('sticky')
+//   } else {
+//     nav.classList.remove('sticky')
+//   }
+// })
+
+
+
 
 //////////////////////////////////////////
 // Page navigation
