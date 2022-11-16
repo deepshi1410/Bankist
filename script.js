@@ -160,6 +160,26 @@ const observerOptions = {
 const headerObserver = new IntersectionObserver(stickyNav, observerOptions)
 headerObserver.observe(headerElement)
 
+// showing hidden elements one by one as we scroll down the page 
+// selecting all elements
+const allSectionElements = document.querySelectorAll('.section')
+// callback function for observer api
+const revealSection = function (entries, observer) {
+  const [entry] = entries
+  console.log('reveal', entry)
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden')
+  observer.unobserve(entry.target)
+}
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15
+})
+// adding hidden class to each section element which is 15% viewable on viewport
+allSectionElements.forEach(ele => {
+  sectionObserver.observe(ele)
+  ele.classList.add('section--hidden')
+})
 
 //////////////////////////////////////////
 // Page navigation
