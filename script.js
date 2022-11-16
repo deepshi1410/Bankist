@@ -127,8 +127,38 @@ nav.addEventListener('mouseout', handleMenuHover.bind(1))
 //     nav.classList.remove('sticky')
 //   }
 // })
+// sticky toolbar by intersection observer API
+// This api is used when we want to observe changes when there is intersection between target element and the ancestor or parent element.
+// const observerCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry)
+//   })
+// }
+// // an array is passed in threshold so that both moving in moving out can be obsrved while intersection
+// const observerOptions = {
+//   root: null,
+//   threshold: [0, 0.2]
+// }
+// const observer = new IntersectionObserver(observerCallback, observerOptions)
+// // observing section1 is intersecting the viewport
+// observer.observe(section1)
 
-
+// we want heading to be our target.
+const headerElement = document.querySelector('.header')
+const stickyNav = function (entries) {
+  const [entry] = entries
+  console.log(entry)
+  if (!entry.isIntersecting) nav.classList.add('sticky')
+  else nav.classList.remove('sticky')
+}
+const navHeight = nav.getBoundingClientRect().height
+const observerOptions = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`
+}
+const headerObserver = new IntersectionObserver(stickyNav, observerOptions)
+headerObserver.observe(headerElement)
 
 
 //////////////////////////////////////////
