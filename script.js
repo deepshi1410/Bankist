@@ -147,7 +147,6 @@ nav.addEventListener('mouseout', handleMenuHover.bind(1))
 const headerElement = document.querySelector('.header')
 const stickyNav = function (entries) {
   const [entry] = entries
-  console.log(entry)
   if (!entry.isIntersecting) nav.classList.add('sticky')
   else nav.classList.remove('sticky')
 }
@@ -180,6 +179,32 @@ allSectionElements.forEach(ele => {
   sectionObserver.observe(ele)
   ele.classList.add('section--hidden')
 })
+
+// lazy loading images using intersectionobserver api
+// very good way of optimizing performance as images contribute to size of applcation and hence 
+// incorrect usage of images leads to less optimized website.
+const imageTarget = document.querySelectorAll('img[data-src]')
+const imageObserverCallback = function (entries, observer) {
+  const [entry] = entries
+  console.log(entry)
+  if (!entry.isIntersecting) return
+  entry.target.src = entry.target.dataset.src
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img')
+  })
+  observer.unobserve(entry.target)
+}
+// to make sure our imaes are loaded before user notices lazy loading, we use rootmargin
+const imageObserverOptions = {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px'
+}
+const imageObserver = new IntersectionObserver(imageObserverCallback, imageObserverOptions)
+imageTarget.forEach(img => {
+  imageObserver.observe(img)
+})
+
 
 //////////////////////////////////////////
 // Page navigation
