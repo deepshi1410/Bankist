@@ -440,6 +440,23 @@ logo.classList.contains('class')
 //   console.log('super parent', e.target, e.currentTarget);
 // }, false)
 
+// DOM LIFECYLE EVENTS
+// WHEN HTML IS PARSED AND DOM TREE IS BUILT, this method is called
+document.addEventListener('DOMContentLoaded', function (e) {
+  // console.log('dom content loaded', e)
+})
 
+// when all external css and assets used are imported and parsed along with html
+window.addEventListener('load', function (e) {
+  // console.log('Web page fully loaded', e)
+})
 
+// when something important can be lost by leaving the webpage, use beforeunload event 
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault()
+  e.returnValue = ''
+})
 
+// regular way of placing script tag - head tag
+// here process includes starting parsing html, when js script comes, parsing of html stops till js is executed, them
+// parsing continues, dom tree is built
