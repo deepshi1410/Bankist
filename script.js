@@ -165,7 +165,6 @@ const allSectionElements = document.querySelectorAll('.section')
 // callback function for observer api
 const revealSection = function (entries, observer) {
   const [entry] = entries
-  console.log('reveal', entry)
   if (!entry.isIntersecting) return;
   entry.target.classList.remove('section--hidden')
   observer.unobserve(entry.target)
@@ -186,7 +185,6 @@ allSectionElements.forEach(ele => {
 const imageTarget = document.querySelectorAll('img[data-src]')
 const imageObserverCallback = function (entries, observer) {
   const [entry] = entries
-  console.log(entry)
   if (!entry.isIntersecting) return
   entry.target.src = entry.target.dataset.src
   entry.target.addEventListener('load', function () {
@@ -297,7 +295,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault()
   // matching the correct element
   if (e.target.classList.contains('nav__link')) {
-    console.log('inside contain')
     const id = e.target.getAttribute('href')
     document.querySelector(id).scrollIntoView({
       behavior: 'smooth'
