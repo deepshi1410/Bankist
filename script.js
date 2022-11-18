@@ -205,6 +205,75 @@ imageTarget.forEach(img => {
   imageObserver.observe(img)
 })
 
+//Slider component
+const slider = function () {
+  const slides = document.querySelectorAll('.slide')
+  const btnLeft = document.querySelector('.slider__btn--left')
+  const btnRight = document.querySelector('.slider__btn--right')
+  let curSlide = 0
+  const maxSlides = slides.length
+  const dotContainer = document.querySelector('.dots')
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML('beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`)
+    })
+  }
+  const activateDots = function (slide) {
+    document.querySelectorAll('.dots__dot').forEach(dot => {
+      if (slide === maxSlides) slide = 0;
+      dot.classList.remove('dots__dot--active')
+      document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active')
+    })
+  }
+  const goToSlide = function (slide) {
+    slides.forEach((s, index) => {
+      s.style.transform = `translateX(${100 * (index - slide)}%)`;
+    })
+  }
+  const init = function () {
+    goToSlide(0)
+    createDots()
+    activateDots(0)
+  }
+  init()
+  // next slide
+  const nextSlide = function () {
+    if (curSlide == maxSlides - 1) {
+      curSlide = 0
+    } else curSlide++;
+    goToSlide(curSlide)
+    activateDots(curSlide)
+  }
+  const prevSlide = function () {
+    if (curSlide == 0) {
+      curSlide = maxSlides - 1
+    } else curSlide--;
+    goToSlide(curSlide)
+    activateDots(curSlide)
+  }
+  btnRight.addEventListener('click', nextSlide)
+  btnLeft.addEventListener('click', prevSlide)
+  document.addEventListener('keydown', function (e) {
+    if (e.key == 'ArrowLeft') prevSlide();
+    e.key == 'ArrowRight' && nextSlide();
+  })
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const slide = e.target.dataset.slide
+      activateDots(slide)
+    }
+  })
+}
+// const slider = document.querySelector('.slider')
+// slider.style.overflow = 'visible'
+// slider.style.transform = 'scale(0.4) translateX(-800px)'
+
+
+// slides.forEach((slide, index) => {
+//   slide.style.transform = `translateX(${100 * (index)})%`
+// })
+slider()
 
 //////////////////////////////////////////
 // Page navigation
